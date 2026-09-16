@@ -24,6 +24,11 @@ const services = [
     description:
       "Producción fotográfica profesional adaptable a cada proyecto y necesidad.",
   },
+  {
+    title: "Sitios & Landings",
+    description:
+      "Webs rápidas, claras y con foco en conversión — como esta, pero para vos.",
+  },
 ];
 
 export default function Services() {

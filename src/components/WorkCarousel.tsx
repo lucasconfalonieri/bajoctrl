@@ -223,7 +223,7 @@ export default function WorkCarousel({ projects }: { projects: Project[] }) {
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 scrollbar-none cursor-grab active:cursor-grabbing"
+        className="flex items-start snap-x snap-mandatory gap-6 overflow-x-auto pb-2 scrollbar-none cursor-grab active:cursor-grabbing"
       >
         {padded.map((project, domIndex) => {
           const isClone = domIndex === 0 || domIndex === count + 1;
