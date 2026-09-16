@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --color-maroon: #741c28;
+  --color-maroon-deep: #591420;
+  --color-pink: #ff8ae5;
+  --color-pink-light: #ffd2d9;
+  --color-ink: #2d2d2d;
+  --color-cream: #fff6f2;
+
+  --background: var(--color-maroon);
+  --foreground: var(--color-cream);
+}
+
+@theme inline {
+  --color-maroon: var(--color-maroon);
+  --color-maroon-deep: var(--color-maroon-deep);
+  --color-pink: var(--color-pink);
+  --color-pink-light: var(--color-pink-light);
+  --color-ink: var(--color-ink);
+  --color-cream: var(--color-cream);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: var(--font-unbounded), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 246, 242, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 246, 242, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: var(--color-ink);
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(-18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-drop {
+  animation: drop 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drop {
+    animation: none;
+  }
+}
