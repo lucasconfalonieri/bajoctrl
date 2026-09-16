@@ -1,33 +1,28 @@
 const services = [
   {
-    title: "Branding & Diseño",
+    title: "Diseño gráfico",
     description:
-      "Identidad visual, sistemas de marca y piezas gráficas que hacen que te reconozcan a primera vista.",
+      "Posts, carruseles, flyers digitales, banners, reels y contenido gráfico adaptado a la identidad de cada marca.",
   },
   {
-    title: "Marketing Digital",
+    title: "Estrategia de contenido & Planificación",
     description:
-      "Estrategia, pauta y funnels pensados para vender, no solo para gustar.",
+      "Calendarios editoriales mensuales, definición de líneas de comunicación y ejes temáticos por cliente.",
   },
   {
-    title: "Community Management",
+    title: "Pauta paga",
     description:
-      "Contenido, calendario y comunidad gestionados con voz propia, todos los días del mes.",
+      "Estrategia y estructura de campañas en Meta Ads y Google Ads.",
   },
   {
-    title: "Producción de Contenido",
+    title: "Video y edición audiovisual",
     description:
-      "Foto, video y diseño de piezas listas para redes, campañas y pauta.",
+      "Reels y videos cortos integrando diseño gráfico y narrativa visual.",
   },
   {
-    title: "Estrategia de Marca",
+    title: "Fotografía de producto & branding",
     description:
-      "Posicionamiento, tono de voz y arquitectura de marca antes de diseñar un solo pixel.",
-  },
-  {
-    title: "Sitios & Landings",
-    description:
-      "Webs rápidas, claras y con foco en conversión — como esta, pero para vos.",
+      "Producción fotográfica profesional adaptable a cada proyecto y necesidad.",
   },
 ];
 

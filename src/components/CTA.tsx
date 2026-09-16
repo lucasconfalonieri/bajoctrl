@@ -5,7 +5,7 @@ import LinkButton from "./LinkButton";
 
 export default function CTA() {
   return (
-    <section id="contacto" className="border-t border-cream/10">
+    <section id="contacto" className="border-t border-cream/10 bg-ink bg-grid">
       <div className="mx-auto flex max-w-lg flex-col items-center px-6 py-24 text-center">
         <Image
           src="/brand/mark-pink-on-dark.png"

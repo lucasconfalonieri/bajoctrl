@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${spaceGrotesk.variable} ${unbounded.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-maroon text-cream">
+      <body className="min-h-full flex flex-col bg-maroon bg-grid text-cream">
         {children}
       </body>
     </html>

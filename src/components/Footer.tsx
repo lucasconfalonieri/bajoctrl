@@ -4,15 +4,15 @@ import { InstagramIcon, WhatsappIcon } from "./icons";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-cream">
+    <footer className="bg-maroon bg-grid text-cream">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-14 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-3">
           <Image
-            src="/brand/mark-pink-on-dark.png"
+            src="/brand/mark-dark.png"
             alt="bajo ctrl"
             width={32}
             height={32}
-            className="h-8 w-8"
+            className="h-8 w-8 invert"
           />
           <span className="font-display text-base font-semibold">
             bajo ctrl <span className="font-normal text-cream/50">estudio creativo</span>

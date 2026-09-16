@@ -5,10 +5,10 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden">
       <div className="pointer-events-none absolute -right-24 -top-24 h-105 w-105 opacity-15 sm:-right-16 sm:-top-16">
         <Image
-          src="/brand/mark-pink-on-dark.png"
+          src="/brand/mark-dark.png"
           alt=""
           fill
-          className="object-contain"
+          className="object-contain invert"
           priority
         />
       </div>

@@ -15,7 +15,7 @@ export default function LinkButton({
 }) {
   const tone =
     variant === "dark"
-      ? "bg-ink text-pink-light border-pink hover:bg-[#1c1c1c]"
+      ? "bg-maroon-deep text-cream border-pink hover:bg-maroon"
       : "bg-pink-light text-maroon-deep border-ink hover:bg-pink";
 
   return (

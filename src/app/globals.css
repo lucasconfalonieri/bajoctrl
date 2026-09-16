@@ -31,23 +31,20 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  position: relative;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
+/*
+  Dotted grid pattern. Applied per-section (not just on body) so it survives
+  on sections that set their own solid background color — background-image
+  always paints on top of background-color on the same box, and
+  background-attachment: fixed keeps the dots aligned across section
+  boundaries as if it were one continuous global grid.
+*/
+.bg-grid {
   background-image: linear-gradient(rgba(255, 246, 242, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 246, 242, 0.05) 1px, transparent 1px);
   background-size: 42px 42px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-body > * {
-  position: relative;
-  z-index: 1;
+  background-attachment: fixed;
 }
 
 ::selection {
@@ -74,4 +71,37 @@ body > * {
   .animate-drop {
     animation: none;
   }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+@keyframes carousel-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-carousel-progress {
+  transform-origin: left;
+  animation: carousel-progress 6s linear forwards;
 }
