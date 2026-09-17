@@ -33,7 +33,7 @@ export default function Hero() {
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <a
-            href="#contacto"
+            href="/presupuesto"
             className="inline-flex items-center justify-center border-2 border-pink bg-pink px-7 py-3.5 text-base font-semibold text-ink transition-colors hover:bg-pink-light"
           >
             Contanos tu proyecto

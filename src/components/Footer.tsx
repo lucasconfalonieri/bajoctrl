@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { InstagramIcon, WhatsappIcon } from "./icons";
 
@@ -20,10 +21,11 @@ export default function Footer() {
         </div>
 
         <nav className="flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs uppercase tracking-widest text-cream/60">
-          <a href="#servicios" className="hover:text-pink-light">Servicios</a>
-          <a href="#trabajo" className="hover:text-pink-light">Trabajo</a>
-          <a href="#nosotros" className="hover:text-pink-light">Nosotros</a>
-          <a href="#contacto" className="hover:text-pink-light">Contacto</a>
+          <Link href="/#servicios" className="hover:text-pink-light">Servicios</Link>
+          <Link href="/#trabajo" className="hover:text-pink-light">Trabajo</Link>
+          <Link href="/#nosotros" className="hover:text-pink-light">Nosotros</Link>
+          <Link href="/#contacto" className="hover:text-pink-light">Contacto</Link>
+          <Link href="/presupuesto" className="hover:text-pink-light">Presupuesto</Link>
         </nav>
 
         <div className="flex gap-5">

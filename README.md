@@ -27,6 +27,41 @@ Abrí [http://localhost:3000](http://localhost:3000).
   ubicación) usados en todo el sitio.
 - `public/brand/` — recortes curados del isotipo y logotipo (PNG con
   transparencia) tomados de `assets/`.
+- `src/app/presupuesto/` — formulario público de solicitud de presupuesto
+  (campos dinámicos según rubro, ver `src/lib/rubros.ts`).
+- `src/app/admin/` — bandeja de presupuestos (login + lista + detalle),
+  protegida por `src/proxy.ts`.
+
+## Formulario de presupuesto + panel admin
+
+El botón "Contanos tu proyecto" del Hero lleva a `/presupuesto`, un
+formulario que replica el que la clienta ya usaba en JotForm: datos
+generales, un bloque de campos que cambia según el rubro elegido (salud,
+gastronomía, comercio, servicios, funeraria, laboratorio, otro — ver
+`src/lib/rubros.ts`, fuente única de verdad para el formulario, la
+validación y el panel admin), y una sección de presencia digital/objetivos.
+
+Al enviarse: se guarda en Supabase, se manda un mail de aviso a la admin
+(Resend), y queda visible en `/admin` (login con Supabase Auth) para que
+desde ahí se le escriba al cliente por WhatsApp con el presupuesto.
+
+**Para conectarlo** (no funciona hasta hacer esto — sin las variables de
+entorno, el formulario y el panel admin lo avisan en pantalla en vez de
+romper):
+
+1. Creá un proyecto en [supabase.com](https://supabase.com) (gratis).
+2. Corré `supabase/schema.sql` en el SQL Editor de Supabase (crea la tabla
+   `leads`).
+3. Creá el usuario admin en Supabase → Authentication → Users → Add user.
+4. Creá una cuenta en [resend.com](https://resend.com) (gratis) y sacá una
+   API key.
+5. Copiá `.env.local.example` a `.env.local` y completá los valores (ver
+   comentarios en ese archivo). En Vercel, cargá las mismas variables en
+   Settings → Environment Variables — son secretos, no van al repo.
+
+El proyecto necesita **Node.js 22+** (`@supabase/supabase-js` lo requiere) —
+ver `engines` en `package.json`. Verificá que el proyecto en Vercel esté
+configurado con esa versión.
 
 ## Paleta de marca
 

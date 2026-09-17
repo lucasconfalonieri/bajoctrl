@@ -7,10 +7,10 @@ import { SITE } from "@/lib/site";
 import { InstagramIcon, WhatsappIcon } from "./icons";
 
 const links = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#trabajo", label: "Trabajo" },
-  { href: "#nosotros", label: "Nosotros" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#trabajo", label: "Trabajo" },
+  { href: "/#nosotros", label: "Nosotros" },
+  { href: "/#contacto", label: "Contacto" },
 ];
 
 export default function Header() {
@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link href="#top" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
+        <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <Image
             src="/brand/mark-pink-on-dark.png"
             alt="bajo ctrl"
@@ -35,13 +35,13 @@ export default function Header() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="font-mono text-xs uppercase tracking-widest text-cream/70 transition-colors hover:text-pink-light"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -64,12 +64,12 @@ export default function Header() {
           >
             <WhatsappIcon className="h-5 w-5" />
           </a>
-          <a
-            href="#contacto"
+          <Link
+            href="/presupuesto"
             className="border-2 border-cream/80 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cream transition-colors hover:border-pink hover:bg-pink hover:text-ink"
           >
-            Empecemos
-          </a>
+            Pedí tu presupuesto
+          </Link>
         </div>
 
         <button
@@ -92,14 +92,14 @@ export default function Header() {
       {open && (
         <nav className="flex flex-col gap-1 bg-maroon-deep px-6 py-4 md:hidden">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
               className="py-2 font-mono text-sm uppercase tracking-widest text-cream/80"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <div className="mt-3 flex items-center gap-5">
             <a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-cream/80">
@@ -109,13 +109,13 @@ export default function Header() {
               <WhatsappIcon className="h-5 w-5" />
             </a>
           </div>
-          <a
-            href="#contacto"
+          <Link
+            href="/presupuesto"
             onClick={() => setOpen(false)}
             className="mt-3 border-2 border-cream/80 px-5 py-2.5 text-center font-mono text-xs uppercase tracking-widest text-cream"
           >
-            Empecemos
-          </a>
+            Pedí tu presupuesto
+          </Link>
         </nav>
       )}
     </header>
