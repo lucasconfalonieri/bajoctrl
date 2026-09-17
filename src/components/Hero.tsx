@@ -42,7 +42,7 @@ export default function Hero() {
             href="#trabajo"
             className="inline-flex items-center justify-center border-2 border-cream/30 px-7 py-3.5 text-base font-semibold text-cream transition-colors hover:border-cream hover:bg-cream/5"
           >
-            Ver trabajo
+            Ver trabajos
           </a>
         </div>
 

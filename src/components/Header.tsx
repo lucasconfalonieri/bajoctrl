@@ -21,7 +21,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link href="/" onClick={() => setOpen(false)}>
           <Image
-            src="/brand/wordmark-pink.png"
+            src="/brand/wordmark-cream.png"
             alt="bajo ctrl estudio creativo"
             width={273}
             height={101}
