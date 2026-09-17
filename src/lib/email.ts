@@ -36,7 +36,7 @@ const DOT_GRID = (color: string) =>
 function buildEmailHtml(lead: LeadInput & { id: string }, siteUrl: string) {
   const rubroDef = getRubro(lead.rubro);
   const rubroLabel = rubroDef?.label ?? lead.rubro;
-  const logoUrl = `${siteUrl}/brand/mark-pink-on-dark.png`;
+  const logoUrl = `${siteUrl}/brand/wordmark-cream.png`;
   const detailUrl = `${siteUrl}/admin/leads/${lead.id}`;
 
   const generalRows: [string, string | undefined][] = [
@@ -138,14 +138,8 @@ function buildEmailHtml(lead: LeadInput & { id: string }, siteUrl: string) {
                         ${escapeHtml(rubroLabel)}
                       </p>
                     </td>
-                    <td width="60" style="vertical-align:middle;text-align:right;">
-                      <table role="presentation" cellpadding="0" cellspacing="0" align="right">
-                        <tr>
-                          <td width="60" height="60" bgcolor="#8a3542" style="background-color:rgba(255,255,255,0.14);border-radius:16px;text-align:center;vertical-align:middle;">
-                            <img src="${logoUrl}" width="34" height="34" alt="bajo ctrl" style="display:block;margin:13px;" />
-                          </td>
-                        </tr>
-                      </table>
+                    <td width="150" style="vertical-align:middle;text-align:right;">
+                      <img src="${logoUrl}" width="140" height="52" alt="bajo ctrl estudio creativo" style="display:block;margin-left:auto;" />
                     </td>
                   </tr>
                 </table>

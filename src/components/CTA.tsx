@@ -8,11 +8,11 @@ export default function CTA() {
     <section id="contacto" className="border-t border-cream/10 bg-ink bg-grid">
       <div className="mx-auto flex max-w-lg flex-col items-center px-6 py-24 text-center">
         <Image
-          src="/brand/mark-pink-on-dark.png"
-          alt="bajo ctrl estudio"
-          width={72}
-          height={72}
-          className="animate-drop h-16 w-16"
+          src="/brand/wordmark-pink.png"
+          alt="bajo ctrl estudio creativo"
+          width={273}
+          height={101}
+          className="animate-drop h-18 w-auto"
         />
 
         <p className="mt-6 font-mono text-xs uppercase tracking-widest text-pink-light">

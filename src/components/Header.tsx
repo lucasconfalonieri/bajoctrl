@@ -19,18 +19,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-maroon/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
+        <Link href="/" onClick={() => setOpen(false)}>
           <Image
-            src="/brand/mark-pink-on-dark.png"
-            alt="bajo ctrl"
-            width={34}
-            height={34}
-            className="h-8 w-8"
+            src="/brand/wordmark-pink.png"
+            alt="bajo ctrl estudio creativo"
+            width={273}
+            height={101}
+            className="h-11 w-auto"
             priority
           />
-          <span className="font-display text-base font-semibold tracking-tight text-cream">
-            bajo ctrl
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
