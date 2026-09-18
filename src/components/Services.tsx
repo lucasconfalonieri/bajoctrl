@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const services = [
   {
     title: "Diseño gráfico",
@@ -25,11 +27,16 @@ const services = [
       "Producción fotográfica profesional adaptable a cada proyecto y necesidad.",
   },
   {
-    title: "Sitios & Landings",
+    title: "Fotografía y cobertura de eventos",
     description:
-      "Webs rápidas, claras y con foco en conversión — como esta, pero para vos.",
+      "Cumpleaños, casamientos, eventos empresariales y más: cobertura a medida según la duración, la ubicación y el tipo de fotos que necesitás.",
+    href: "/presupuesto?rubro=fotografia",
+    cta: "Pedir presupuesto",
   },
 ];
+
+const cardClass =
+  "group block border-2 border-cream/15 bg-maroon-deep/40 p-8 transition-colors hover:border-pink hover:bg-maroon-deep/70";
 
 export default function Services() {
   return (
@@ -45,20 +52,34 @@ export default function Services() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="group border-2 border-cream/15 bg-maroon-deep/40 p-8 transition-colors hover:border-pink hover:bg-maroon-deep/70"
-            >
-              <div className="mb-6 h-9 w-9 rounded-full bg-pink transition-transform group-hover:scale-110" />
-              <h3 className="font-display text-xl font-semibold text-cream">
-                {service.title}
-              </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-cream/60">
-                {service.description}
-              </p>
-            </div>
-          ))}
+          {services.map((service) => {
+            const content = (
+              <>
+                <div className="mb-6 h-9 w-9 rounded-full bg-pink transition-transform group-hover:scale-110" />
+                <h3 className="font-display text-xl font-semibold text-cream">
+                  {service.title}
+                </h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-cream/60">
+                  {service.description}
+                </p>
+                {service.href && (
+                  <p className="mt-5 font-mono text-xs uppercase tracking-widest text-pink-light">
+                    {service.cta} →
+                  </p>
+                )}
+              </>
+            );
+
+            return service.href ? (
+              <Link key={service.title} href={service.href} className={cardClass}>
+                {content}
+              </Link>
+            ) : (
+              <div key={service.title} className={cardClass}>
+                {content}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -132,7 +132,7 @@ function buildEmailHtml(lead: LeadInput & { id: string }, siteUrl: string) {
                         Nuevo presupuesto solicitado
                       </p>
                       <h1 style="margin:8px 0 0;font:700 24px/1.3 ${FONT_DISPLAY};color:${COLORS.cream};">
-                        ${escapeHtml(lead.nombre_negocio)}
+                        ${escapeHtml(lead.nombre_negocio || lead.nombre_apellido)}
                       </h1>
                       <p style="margin:6px 0 0;font:14px/1.4 ${FONT_BODY};color:${COLORS.pinkLight};">
                         ${escapeHtml(rubroLabel)}
@@ -149,7 +149,7 @@ function buildEmailHtml(lead: LeadInput & { id: string }, siteUrl: string) {
             <tr><td style="height:24px;background-color:#ffffff;" bgcolor="#ffffff"></td></tr>
 
             ${section("Datos generales", generalRows)}
-            ${section(`Sobre el negocio · ${rubroLabel}`, detalleRows)}
+            ${section(rubroDef?.eventMode ? "Sobre el evento o proyecto" : `Sobre el negocio · ${rubroLabel}`, detalleRows)}
             ${section("Presencia digital y objetivos", digitalRows)}
 
             <tr>
@@ -192,7 +192,7 @@ function buildEmailText(lead: LeadInput & { id: string }, siteUrl: string, rubro
     `Nuevo presupuesto solicitado — ${rubroLabel}`,
     "",
     `Nombre: ${lead.nombre_apellido}`,
-    `Negocio/marca: ${lead.nombre_negocio}`,
+    lead.nombre_negocio ? `Negocio/marca: ${lead.nombre_negocio}` : null,
     `Teléfono: ${lead.telefono}`,
     `Email: ${lead.email}`,
     lead.ciudad ? `Ciudad: ${lead.ciudad}` : null,
@@ -221,7 +221,7 @@ export async function sendNewLeadEmail(lead: LeadInput & { id: string }) {
     await resend.emails.send({
       from: `bajo ctrl <${FROM_ADDRESS}>`,
       to,
-      subject: `Nuevo presupuesto: ${lead.nombre_negocio} (${rubroLabel})`,
+      subject: `Nuevo presupuesto: ${lead.nombre_negocio || lead.nombre_apellido} (${rubroLabel})`,
       html: buildEmailHtml(lead, siteUrl),
       text: buildEmailText(lead, siteUrl, rubroLabel),
     });

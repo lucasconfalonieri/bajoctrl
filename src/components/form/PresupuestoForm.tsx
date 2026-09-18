@@ -20,19 +20,31 @@ import {
 
 const initialState: SubmitLeadState = { status: "idle" };
 
-function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
+function SectionCard({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="border-2 border-cream/15 bg-maroon-deep/30 p-6 sm:p-8">
       <h2 className="font-display text-lg font-semibold text-cream sm:text-xl">{title}</h2>
+      {description && (
+        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-cream/65">{description}</p>
+      )}
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">{children}</div>
     </div>
   );
 }
 
-export default function PresupuestoForm() {
+export default function PresupuestoForm({ initialRubro = "" }: { initialRubro?: string }) {
   const [state, formAction, pending] = useActionState(submitLead, initialState);
-  const [rubro, setRubro] = useState("");
+  const [rubro, setRubro] = useState(getRubro(initialRubro) ? initialRubro : "");
   const rubroDef = getRubro(rubro);
+  const isEvent = Boolean(rubroDef?.eventMode);
 
   if (state.status === "success") {
     return (
@@ -53,11 +65,15 @@ export default function PresupuestoForm() {
     <form action={formAction} className="flex flex-col gap-6">
       <SectionCard title="Datos generales">
         <TextInput label="Nombre y apellido" name="nombre_apellido" required />
-        <TextInput label="Nombre del negocio o marca" name="nombre_negocio" required />
+        <TextInput
+          label={isEvent ? "Empresa o marca (si aplica)" : "Nombre del negocio o marca"}
+          name="nombre_negocio"
+          required={!isEvent}
+        />
         <TextInput label="Teléfono de contacto" name="telefono" type="tel" required />
         <TextInput label="Email de contacto" name="email" type="email" required />
         <TextInput label="Ciudad" name="ciudad" placeholder="Corrientes Capital, Goya…" />
-        <TextInput label="¿Hace cuánto tenés el negocio?" name="antiguedad_negocio" />
+        {!isEvent && <TextInput label="¿Hace cuánto tenés el negocio?" name="antiguedad_negocio" />}
         <div className="sm:col-span-2">
           <SelectInput
             label="Rubro"
@@ -72,27 +88,37 @@ export default function PresupuestoForm() {
       </SectionCard>
 
       {rubroDef && (
-        <SectionCard title={`Sobre tu negocio · ${rubroDef.label}`}>
+        <SectionCard
+          title={rubroDef.intro?.title ?? `Sobre tu negocio · ${rubroDef.label}`}
+          description={rubroDef.intro?.description}
+        >
           {rubroDef.fields.map((field) => {
             const name = `detalle_${field.name}`;
+            // Wide fields (textareas, long option lists) get the full row.
+            const wide =
+              field.type === "textarea" ||
+              ((field.type === "radio" || field.type === "checkbox") &&
+                (field.options?.length ?? 0) > 3);
+            let control: React.ReactNode;
             if (field.type === "textarea") {
-              return <TextareaInput key={name} label={field.label} name={name} />;
+              control = <TextareaInput label={field.label} name={name} />;
+            } else if (field.type === "radio") {
+              control = <RadioGroup label={field.label} name={name} options={field.options ?? []} />;
+            } else if (field.type === "checkbox") {
+              control = <CheckboxGroup label={field.label} name={name} options={field.options ?? []} />;
+            } else {
+              control = <TextInput label={field.label} name={name} placeholder={field.placeholder} />;
             }
-            if (field.type === "radio") {
-              return (
-                <RadioGroup key={name} label={field.label} name={name} options={field.options ?? []} />
-              );
-            }
-            if (field.type === "checkbox") {
-              return (
-                <CheckboxGroup key={name} label={field.label} name={name} options={field.options ?? []} />
-              );
-            }
-            return <TextInput key={name} label={field.label} name={name} />;
+            return (
+              <div key={name} className={wide ? "sm:col-span-2" : undefined}>
+                {control}
+              </div>
+            );
           })}
         </SectionCard>
       )}
 
+      {!isEvent && (
       <SectionCard title="Presencia digital y objetivos">
         <RadioGroup label="¿Tenés redes activas hoy?" name="redes_activas" options={REDES_ACTIVAS_OPTIONS} />
         <TextInput label="Usuario de Instagram / Facebook" name="redes_handle" placeholder="@tu_marca" />
@@ -108,6 +134,7 @@ export default function PresupuestoForm() {
           <TextareaInput label="¿Hay algo de tu marca que quieras que respetemos sí o sí?" name="restricciones_marca" />
         </div>
       </SectionCard>
+      )}
 
       {state.status === "error" && (
         <p className="border-2 border-pink/60 bg-maroon-deep/40 px-5 py-4 text-[14px] text-pink-light">

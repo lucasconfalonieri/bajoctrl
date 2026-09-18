@@ -5,6 +5,7 @@ export type FieldDef = {
   label: string;
   type: FieldType;
   options?: string[];
+  placeholder?: string;
 };
 
 export type RubroKey =
@@ -14,12 +15,21 @@ export type RubroKey =
   | "servicios"
   | "funeraria"
   | "laboratorio"
+  | "fotografia"
   | "otro";
 
 export type RubroDef = {
   key: RubroKey;
   label: string;
   fields: FieldDef[];
+  /** Custom heading + blurb shown above this rubro's fields. */
+  intro?: { title: string; description: string };
+  /**
+   * For bookings of a one-off service (e.g. event photography) rather than
+   * an ongoing business: the business name becomes optional, business
+   * age and the "digital presence" section are skipped.
+   */
+  eventMode?: boolean;
 };
 
 export const RUBROS: RubroDef[] = [
@@ -136,6 +146,97 @@ export const RUBROS: RubroDef[] = [
         options: ["Análisis clínicos", "Laboratorio farmacéutico/producción", "Otro"],
       },
       { name: "servicios_estudios", label: "Servicios / estudios que realizan", type: "textarea" },
+    ],
+  },
+  {
+    key: "fotografia",
+    label: "Fotografía y cobertura de eventos",
+    eventMode: true,
+    intro: {
+      title: "Fotografía",
+      description:
+        "Cada evento es diferente. Contanos qué estás organizando y armamos una propuesta según la duración, ubicación y tipo de cobertura que necesitás.",
+    },
+    fields: [
+      {
+        name: "tipo_fotografia",
+        label: "¿Qué tipo de fotografía necesitás?",
+        type: "radio",
+        options: [
+          "Evento social",
+          "Cumpleaños",
+          "Casamiento / civil",
+          "15 años",
+          "Bautismo / comunión",
+          "Evento empresarial",
+          "Evento gastronómico",
+          "Fotografía de producto",
+          "Fotografía para marca / contenido",
+          "Retratos",
+          "Otro",
+        ],
+      },
+      { name: "detalle_evento", label: "Contanos un poco sobre el evento / proyecto", type: "textarea" },
+      { name: "fecha", label: "¿Qué fecha es?", type: "text", placeholder: "Ej: 14/12, o «todavía no está definida»" },
+      {
+        name: "horario",
+        label: "¿En qué horario sería?",
+        type: "radio",
+        options: ["Mañana", "Mediodía", "Tarde", "Noche", "Todavía no está definido"],
+      },
+      {
+        name: "duracion",
+        label: "¿Cuánto tiempo necesitás aproximadamente?",
+        type: "radio",
+        options: [
+          "Hasta 1 hora",
+          "1 a 2 horas",
+          "2 a 3 horas",
+          "3 a 4 horas",
+          "Más de 4 horas",
+          "Todavía no lo sé",
+        ],
+      },
+      {
+        name: "ubicacion",
+        label: "¿Dónde se realiza?",
+        type: "text",
+        placeholder: "Dirección o zona — lo usamos para calcular el traslado",
+      },
+      {
+        name: "cantidad_personas",
+        label: "¿Aproximadamente cuántas personas habrá?",
+        type: "radio",
+        options: ["Hasta 20", "20–50", "50–100", "100–200", "Más de 200", "No sé todavía"],
+      },
+      {
+        name: "tipo_fotos",
+        label: "¿Qué tipo de fotos buscás?",
+        type: "checkbox",
+        options: [
+          "Fotos espontáneas / momentos",
+          "Fotos grupales",
+          "Fotos de ambientación y detalles",
+          "Fotos de productos / comida",
+          "Fotos posadas",
+          "Fotos para redes sociales",
+          "Cobertura completa del evento",
+          "Otro",
+        ],
+      },
+      {
+        name: "adicionales",
+        label: "¿Necesitás algún adicional?",
+        type: "checkbox",
+        options: [
+          "Video / clips verticales",
+          "Reels",
+          "Fotografía + contenido para redes",
+          "Flash / iluminación",
+          "Otro",
+          "Ninguno",
+        ],
+      },
     ],
   },
   {

@@ -9,7 +9,13 @@ export const metadata: Metadata = {
     "Contanos sobre tu marca y tu rubro y te mandamos una propuesta a medida por WhatsApp o email.",
 };
 
-export default function PresupuestoPage() {
+export default async function PresupuestoPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ rubro?: string }>;
+}) {
+  const { rubro } = await searchParams;
+
   return (
     <>
       <Header />
@@ -29,7 +35,7 @@ export default function PresupuestoPage() {
             </p>
 
             <div className="mt-12">
-              <PresupuestoForm />
+              <PresupuestoForm initialRubro={rubro} />
             </div>
           </div>
         </section>

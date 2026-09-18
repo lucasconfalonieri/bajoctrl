@@ -42,6 +42,15 @@ export default async function LeadDetailPage({
   if (!lead) notFound();
 
   const rubroDef = getRubro(lead.rubro);
+  const hasDigital = Boolean(
+    lead.redes_activas ||
+      lead.redes_handle ||
+      lead.tono_comunicacion ||
+      lead.presupuesto_ads ||
+      lead.objetivo_principal ||
+      lead.materiales_visuales?.length ||
+      lead.restricciones_marca
+  );
   const detalleEntries = rubroDef
     ? rubroDef.fields
         .map((field) => {
@@ -67,7 +76,8 @@ export default async function LeadDetailPage({
                 {lead.nombre_apellido}
               </h1>
               <p className="mt-1 text-cream/60">
-                {lead.nombre_negocio} · {rubroDef?.label ?? lead.rubro}
+                {lead.nombre_negocio ? `${lead.nombre_negocio} · ` : ""}
+                {rubroDef?.label ?? lead.rubro}
               </p>
             </div>
             <StatusSelect id={lead.id} status={lead.status} />
@@ -104,7 +114,7 @@ export default async function LeadDetailPage({
             {detalleEntries.length > 0 && (
               <section className="border-2 border-cream/15 bg-maroon-deep/30 p-6">
                 <h2 className="font-display text-base font-semibold text-cream">
-                  Sobre el negocio · {rubroDef?.label}
+                  {rubroDef?.eventMode ? "Sobre el evento o proyecto" : `Sobre el negocio · ${rubroDef?.label}`}
                 </h2>
                 <dl className="mt-4 flex flex-col gap-4">
                   {detalleEntries.map((entry) => (
@@ -114,6 +124,7 @@ export default async function LeadDetailPage({
               </section>
             )}
 
+            {hasDigital && (
             <section className="border-2 border-cream/15 bg-maroon-deep/30 p-6 sm:col-span-2">
               <h2 className="font-display text-base font-semibold text-cream">
                 Presencia digital y objetivos
@@ -131,6 +142,7 @@ export default async function LeadDetailPage({
                 <Row label="Restricciones de marca" value={lead.restricciones_marca} />
               </dl>
             </section>
+            )}
           </div>
         </div>
       </main>

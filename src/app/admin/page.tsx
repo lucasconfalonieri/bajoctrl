@@ -86,7 +86,7 @@ export default async function AdminPage({
                         id={lead.id}
                         date={formatDate(lead.created_at)}
                         nombre={lead.nombre_apellido}
-                        negocio={lead.nombre_negocio}
+                        negocio={lead.nombre_negocio || "—"}
                         rubroLabel={getRubro(lead.rubro)?.label ?? lead.rubro}
                         status={lead.status}
                       />

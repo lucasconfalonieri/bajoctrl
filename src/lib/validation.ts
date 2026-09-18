@@ -3,9 +3,12 @@ import { RUBROS, getRubro } from "./rubros";
 
 const rubroKeys = RUBROS.map((r) => r.key) as [string, ...string[]];
 
-export const leadSchema = z.object({
+export const leadSchema = z
+  .object({
   nombre_apellido: z.string().trim().min(1, "Falta el nombre y apellido"),
-  nombre_negocio: z.string().trim().min(1, "Falta el nombre del negocio o marca"),
+  // Required for regular rubros (enforced in superRefine below); optional
+  // for event-style bookings like photography, where there's no business.
+  nombre_negocio: z.string().trim().optional().default(""),
   telefono: z.string().trim().min(6, "Falta un teléfono válido"),
   email: z.string().trim().email("El email no es válido"),
   ciudad: z.string().trim().optional().default(""),
@@ -22,7 +25,16 @@ export const leadSchema = z.object({
   presupuesto_ads: z.string().trim().optional().default(""),
   materiales_visuales: z.array(z.string()).optional().default([]),
   restricciones_marca: z.string().trim().optional().default(""),
-});
+  })
+  .superRefine((data, ctx) => {
+    if (!data.nombre_negocio && !getRubro(data.rubro)?.eventMode) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["nombre_negocio"],
+        message: "Falta el nombre del negocio o marca",
+      });
+    }
+  });
 
 export type LeadInput = z.infer<typeof leadSchema>;
 
