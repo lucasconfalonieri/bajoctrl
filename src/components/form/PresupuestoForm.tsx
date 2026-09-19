@@ -64,6 +64,19 @@ export default function PresupuestoForm({ initialRubro = "" }: { initialRubro?: 
   return (
     <form action={formAction} className="flex flex-col gap-6">
       <SectionCard title="Datos generales">
+        {/* First on purpose: what they pick here decides which fields below
+            are required (e.g. no business name for an event booking). */}
+        <div className="sm:col-span-2">
+          <SelectInput
+            label="Rubro o tipo de servicio"
+            name="rubro"
+            required
+            value={rubro}
+            onChange={setRubro}
+            placeholder="Elegí una opción…"
+            options={RUBROS.map((r) => ({ value: r.key, label: r.label }))}
+          />
+        </div>
         <TextInput label="Nombre y apellido" name="nombre_apellido" required />
         <TextInput
           label={isEvent ? "Empresa o marca (si aplica)" : "Nombre del negocio o marca"}
@@ -74,17 +87,6 @@ export default function PresupuestoForm({ initialRubro = "" }: { initialRubro?: 
         <TextInput label="Email de contacto" name="email" type="email" required />
         <TextInput label="Ciudad" name="ciudad" placeholder="Corrientes Capital, Goya…" />
         {!isEvent && <TextInput label="¿Hace cuánto tenés el negocio?" name="antiguedad_negocio" />}
-        <div className="sm:col-span-2">
-          <SelectInput
-            label="Rubro"
-            name="rubro"
-            required
-            value={rubro}
-            onChange={setRubro}
-            placeholder="Elegí tu rubro…"
-            options={RUBROS.map((r) => ({ value: r.key, label: r.label }))}
-          />
-        </div>
       </SectionCard>
 
       {rubroDef && (

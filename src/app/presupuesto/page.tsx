@@ -26,12 +26,12 @@ export default async function PresupuestoPage({
               Pedí tu presupuesto
             </p>
             <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-cream sm:text-5xl">
-              Contanos de tu marca
+              Contanos qué necesitás
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/70">
-              Completá el formulario con los datos de tu negocio. Cuantos más
-              detalles nos des, más ajustada va a ser la propuesta que te
-              mandemos por WhatsApp o email.
+              Completá el formulario con los datos de tu negocio o de tu
+              evento. Cuantos más detalles nos des, más ajustada va a ser la
+              propuesta que te mandemos por WhatsApp o email.
             </p>
 
             <div className="mt-12">
