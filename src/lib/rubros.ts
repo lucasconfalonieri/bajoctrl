@@ -197,12 +197,7 @@ export const RUBROS: RubroDef[] = [
           "Todavía no lo sé",
         ],
       },
-      {
-        name: "ubicacion",
-        label: "¿Dónde se realiza?",
-        type: "text",
-        placeholder: "Dirección o zona — lo usamos para calcular el traslado",
-      },
+      { name: "ubicacion", label: "¿Dónde se realiza?", type: "text", placeholder: "Dirección o zona" },
       {
         name: "cantidad_personas",
         label: "¿Aproximadamente cuántas personas habrá?",
